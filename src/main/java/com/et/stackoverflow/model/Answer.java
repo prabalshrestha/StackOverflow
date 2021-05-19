@@ -11,6 +11,9 @@ public class Answer {
     private String answer;
     private Date timestamp;
 
+    public Answer(){
+        super();
+    }
     public Integer getAnswerId() {
         return answerId;
     }
