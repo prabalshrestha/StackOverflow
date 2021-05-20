@@ -1,15 +1,14 @@
 package com.et.stackoverflow.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name="Users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     private String userName;
     private String password;
@@ -17,25 +16,17 @@ public class User {
     private Date dob;
     private String timestamp;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Question> question=new ArrayList<Question>();
-
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private  List<Answer> answers=new ArrayList<Answer>();
-
     public User(){
         super();
     }
 
-    public User(Integer userId, String userName, String password, String email, Date dob, String timestamp, List<Question> question, List<Answer> answers) {
+    public User(Integer userId, String userName, String password, String email, Date dob, String timestamp) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.dob = dob;
         this.timestamp = timestamp;
-        this.question = question;
-        this.answers = answers;
     }
 
     public Integer getUserId() {
@@ -84,21 +75,5 @@ public class User {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public List<Question> getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(List<Question> question) {
-        this.question = question;
-    }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
     }
 }

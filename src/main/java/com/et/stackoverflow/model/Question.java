@@ -1,37 +1,16 @@
 package com.et.stackoverflow.model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer questionId;
     private String questionTitle;
     private String question;
     private Date timestamp;
-
-    @ManyToOne
-    private User user;
-
-    @OneToMany
-    private List<Answer> answers=new ArrayList<Answer>();
-
-    public Question(){
-        super();
-    }
-
-    public Question(Integer questionId, String questionTitle, String question, Date timestamp, User user, List<Answer> answers) {
-        this.questionId = questionId;
-        this.questionTitle = questionTitle;
-        this.question = question;
-        this.timestamp = timestamp;
-        this.user = user;
-        this.answers = answers;
-    }
 
     public Integer getQuestionId() {
         return questionId;
@@ -63,21 +42,5 @@ public class Question {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
     }
 }
