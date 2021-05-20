@@ -13,6 +13,10 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public List<Question> getAllQues() {
-        return questionRepository.getAllPost();
+        return (List<Question>) questionRepository.findAll();
+    }
+
+    public void createQues(Question question) {
+        questionRepository.save(question);
     }
 }

@@ -1,32 +1,46 @@
 package com.et.stackoverflow.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     private String userName;
     private String password;
     private String email;
     private Date dob;
-    private String timestamp;
+    private Date timestamp;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private List<Question> question=new ArrayList<Question>();
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private  List<Answer> answers=new ArrayList<Answer>();
 
     public User(){
         super();
     }
 
-    public User(Integer userId, String userName, String password, String email, Date dob, String timestamp) {
+    public User(Integer userId, String userName, String password, String email, Date dob, Date timestamp, List<Question> question, List<Answer> answers) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.dob = dob;
         this.timestamp = timestamp;
+        this.question = question;
+        this.answers = answers;
     }
 
     public Integer getUserId() {
@@ -69,11 +83,27 @@ public class User {
         this.dob = dob;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public List<Question> getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(List<Question> question) {
+        this.question = question;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }
