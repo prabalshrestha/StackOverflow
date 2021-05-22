@@ -18,6 +18,8 @@ public class User {
     private String email;
     private Date dob;
     private Date timestamp;
+    private boolean active;
+    private String roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
@@ -41,6 +43,23 @@ public class User {
         this.timestamp = timestamp;
         this.question = question;
         this.answers = answers;
+
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public Integer getUserId() {
