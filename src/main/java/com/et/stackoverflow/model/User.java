@@ -1,11 +1,11 @@
 package com.et.stackoverflow.model;
 
+import com.et.stackoverflow.model.Security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name="Users")
@@ -28,11 +28,16 @@ public class User {
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private  List<Answer> answers=new ArrayList<Answer>();
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
+
     public User(){
         super();
     }
 
-    public User(Integer userId, String userName, String password, String email, Date dob, Date timestamp, List<Question> question, List<Answer> answers) {
+    public User(Integer userId, String userName, String password, String email, Date dob, Date timestamp, List<Question> question, List<Answer> answers, Set<UserRole> userRoles) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -41,6 +46,15 @@ public class User {
         this.timestamp = timestamp;
         this.question = question;
         this.answers = answers;
+        this.userRoles = userRoles;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public Integer getUserId() {

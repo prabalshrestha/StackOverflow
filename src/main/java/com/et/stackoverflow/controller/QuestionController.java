@@ -27,7 +27,6 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.POST,value = "/question/create")
     public String createQuestion(@RequestBody Question question){
 
-
         question.setTimestamp(new Date());
         questionService.createQues(question);
         String response ="{\"success\":true,\"message\":\"Question successfully added\"}";
