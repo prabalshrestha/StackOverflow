@@ -1,5 +1,6 @@
 package com.et.stackoverflow.service;
 
+import com.et.stackoverflow.exception.UserNotFound.UserNotFoundException;
 import com.et.stackoverflow.model.Security.UserRole;
 import com.et.stackoverflow.model.User;
 import com.et.stackoverflow.repository.RoleRepository;
@@ -19,6 +20,12 @@ public class UserService {
 
     public void createUser(User user, Set<UserRole> userRoles) {
 
+        if(userRepository.findByUserName(user.getUserName())!=null){
+            throw new UserNotFoundException("Username already exists");
+        }
+        if(userRepository.findByEmail(user.getEmail())!=null){
+            throw new UserNotFoundException("Email already exists");
+        }
         for(UserRole ur : userRoles) {
             roleRepository.save(ur.getRole());
         }
@@ -39,6 +46,9 @@ public class UserService {
     }
 
     public void deleteUser(Integer userId) {
+        if(userRepository.findByUserId(userId)==null) {
+            throw new UserNotFoundException("User to be deleted does not exist");
+        }
         userRepository.deleteById(userId);
     }
 }

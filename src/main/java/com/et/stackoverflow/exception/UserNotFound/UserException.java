@@ -1,4 +1,4 @@
-package com.et.stackoverflow.exception;
+package com.et.stackoverflow.exception.UserNotFound;
 
 import org.springframework.http.HttpStatus;
 
@@ -9,7 +9,7 @@ public class UserException {
     private final HttpStatus httpStatus;
     private final ZonedDateTime timestamp;
 
-    public UserException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
+    public UserException(String message,  HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
@@ -18,8 +18,6 @@ public class UserException {
     public String getMessage() {
         return message;
     }
-
-
 
     public HttpStatus getHttpStatus() {
         return httpStatus;
