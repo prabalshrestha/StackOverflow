@@ -1,4 +1,4 @@
-package com.et.stackoverflow.exception;
+package com.et.stackoverflow.exception.QuestionNotFound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,21 +6,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Clock;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @ControllerAdvice
-public class UserNotFoundExceptionHandler {
+public class QuestionNotFoundExecptionHandler {
 
-    @ExceptionHandler(value = {UserNotFoundException.class})
-    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e){
+    @ExceptionHandler(value = {QuestionNotFoundException.class})
+    public ResponseEntity<Object> handleQuestionNotFoundException(QuestionNotFoundException e){
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
-        UserException userException= new UserException(
+        QuestionException questionException= new QuestionException(
                 e.getMessage(),
                 badRequest,
                 ZonedDateTime.now(Clock.systemDefaultZone())
         );
-        return new ResponseEntity<>(userException, badRequest);
+        return new ResponseEntity<>(questionException, badRequest);
     }
-
 }

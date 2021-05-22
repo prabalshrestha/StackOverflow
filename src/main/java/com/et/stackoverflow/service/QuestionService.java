@@ -1,5 +1,6 @@
 package com.et.stackoverflow.service;
 
+import com.et.stackoverflow.exception.QuestionNotFound.QuestionNotFoundException;
 import com.et.stackoverflow.model.Question;
 import com.et.stackoverflow.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,18 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public List<Question> getAllQues() {
-        return (List<Question>) questionRepository.findAll();
+        List<Question> questionList = questionRepository.findAll();
+        if(questionList.isEmpty())
+        {
+            System.out.println("eeeeeeeee");
+            throw new QuestionNotFoundException("Questions does not exist");
+        }
+        return (List<Question>) questionList;
     }
 
     public void createQues(Question question) {
         questionRepository.save(question);
     }
+
+
 }
