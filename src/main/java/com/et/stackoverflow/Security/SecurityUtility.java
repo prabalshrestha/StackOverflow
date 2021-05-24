@@ -1,4 +1,4 @@
-/*package com.et.stackoverflow.Security;
+package com.et.stackoverflow.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -16,4 +16,4 @@ public class SecurityUtility {
 
     }
 
-}*/
+}
