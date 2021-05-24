@@ -1,9 +1,11 @@
 package com.et.stackoverflow.service;
 
+import com.et.stackoverflow.Security.SecurityUtility;
 import com.et.stackoverflow.exception.UserNotFound.UserNotFoundException;
 import com.et.stackoverflow.model.User;
 import com.et.stackoverflow.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,8 @@ public class UserService {
         if(userRepository.findByEmail(user.getEmail())!=null){
             throw new UserNotFoundException("Email already exists");
         }
-
+        BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 

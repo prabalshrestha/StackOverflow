@@ -8,7 +8,6 @@ import com.et.stackoverflow.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Access;
 import java.util.Date;
 
 @Service
@@ -25,6 +24,7 @@ public class AnswerService {
         if(question ==null){
             throw new QuestionNotFoundException("The question entered is invalid");
         }
+
         answer.setQuestion(question);
         answer.setTimestamp(new Date());
         answerRepository.save(answer);
