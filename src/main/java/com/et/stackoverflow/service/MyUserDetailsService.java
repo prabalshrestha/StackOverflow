@@ -1,5 +1,6 @@
 package com.et.stackoverflow.service;
 
+
 import com.et.stackoverflow.config.MyUserDetails;
 import com.et.stackoverflow.model.User;
 import com.et.stackoverflow.repository.UserRepository;
@@ -16,9 +17,16 @@ public class MyUserDetailsService implements UserDetailsService {
     UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-       Optional<User> user= userRepository.findByUserName(userName);
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
+        /*Optional<User> user= userRepository.findByUserName(userName);*/
+        User user=userRepository.getUserByUserName(userName);
+       /* user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
 
-        return user.map(MyUserDetails::new).get();
+        return user.map(MyUserDetails::new).get();*/
+        if(user==null)
+        {
+            throw new UsernameNotFoundException("could not find username");
+        }
+        MyUserDetails myUserDetails=new MyUserDetails(user);
+        return myUserDetails;
     }
 }

@@ -34,7 +34,7 @@ public class User {
         super();
     }
 
-    public User(Integer userId, String userName, String password, String email, Date dob, Date timestamp, List<Question> question, List<Answer> answers) {
+    public User(Integer userId, String userName, String password, String roles, String email, Date dob, Date timestamp, List<Question> question, List<Answer> answers) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -43,6 +43,7 @@ public class User {
         this.timestamp = timestamp;
         this.question = question;
         this.answers = answers;
+        this.roles=roles;
 
     }
 
