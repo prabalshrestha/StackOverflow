@@ -24,7 +24,7 @@ public class UserController {
         return response;
     }
 
-    @CrossOrigin`
+    @CrossOrigin
     @DeleteMapping("/user/delete/{userId}")
     private String deleteUser(@PathVariable String userId){
 
