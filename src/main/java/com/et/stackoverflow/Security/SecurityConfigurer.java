@@ -1,6 +1,9 @@
-package com.et.stackoverflow.Security;
+package com.et.stackoverflow.security;
 
+import com.et.stackoverflow.Security.SecurityUtility;
+import com.et.stackoverflow.filter.JwtFilter;
 import com.et.stackoverflow.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,15 +13,24 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
+
+
+
+    @Autowired
+    private JwtFilter jwtFilter;
+
+
     private static final String[] PUBLIC_MATCHERS= {
-            "/**",
+
             "/user/create",
             "/question/all"
 
@@ -31,7 +43,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
         return new MyUserDetailsService();
     }
 
-    /*@Bean*/
+
     public BCryptPasswordEncoder passwordEncoder()
     {
         return SecurityUtility.passwordEncoder();
@@ -62,15 +74,25 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     }
 
+
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-
+       /* http.authorizeRequests()
+                /*.antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/authenticate").permitAll()*/
+        /*.and().formLogin().and().csrf().disable();
+         */
+        http.csrf().disable().authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                /*.antMatchers("/question/**").authenticated()*/
-                .and().formLogin().and().csrf().disable();
+                .antMatchers("/authenticate")
+                .permitAll().anyRequest().authenticated()
+                .and().exceptionHandling().and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);;
     }
 
 
