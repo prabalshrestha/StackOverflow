@@ -27,9 +27,7 @@ public class UserController {
     @CrossOrigin
     @DeleteMapping("/user/delete/{userId}")
     private String deleteUser(@PathVariable String userId){
-
         int Id=Integer.parseInt(userId);
-
         userService.deleteUser(Id);
         String response ="{\"success\":true,\"message\":\"USER DELETED \"}";
         return response;
