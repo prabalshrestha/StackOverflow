@@ -28,4 +28,15 @@ public class QuestionService {
     }
 
 
+    public List<Question> search(String str) {
+        return questionRepository.search(str);
+    }
+
+    public Question getQues(int id) {
+
+        Question question = questionRepository.findByQuestionId(id);
+        if(question==null)
+            throw new QuestionNotFoundException("Question Doesnt Exist");
+        return question;
+    }
 }
