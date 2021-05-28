@@ -20,19 +20,21 @@ public class QuestionController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin
     @GetMapping("/question/all")
     private List<Question> getAllQuestions  (){
         List<Question> allQues = questionService.getAllQues();
         return allQues;
     }
 
+    @CrossOrigin
     @GetMapping("/question/{questionId}")
     public Question getQuestion(@PathVariable String questionId){
         int id=Integer.parseInt(questionId);
         return questionService.getQues(id);
 
     }
-
+    @CrossOrigin
     @PostMapping(value = "/question/create"/*,consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
     public Map<String,String> createQuestion(@RequestBody Question question/*,
                                              Principal principal*/){
@@ -47,6 +49,7 @@ public class QuestionController {
 
         return response;
     }
+    @CrossOrigin
     @GetMapping("/search")
     public List<Question> search(@RequestBody String keyword){
         return questionService.search(keyword);
