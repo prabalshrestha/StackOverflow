@@ -26,9 +26,11 @@ public class QuestionController {
         return allQues;
     }
 
-    @GetMapping("/search")
-    public List<Question> search(@RequestBody String keyword){
-       return questionService.search(keyword);
+    @GetMapping("/question/{questionId}")
+    public Question getQuestion(@PathVariable String questionId){
+        int id=Integer.parseInt(questionId);
+        return questionService.getQues(id);
+
     }
 
     @PostMapping(value = "/question/create"/*,consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
@@ -44,5 +46,9 @@ public class QuestionController {
         response.put("message","Question successfully added");
 
         return response;
+    }
+    @GetMapping("/search")
+    public List<Question> search(@RequestBody String keyword){
+        return questionService.search(keyword);
     }
 }

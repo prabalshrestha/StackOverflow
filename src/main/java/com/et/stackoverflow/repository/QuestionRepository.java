@@ -16,4 +16,6 @@ public interface QuestionRepository extends JpaRepository<Question,Integer> {
             ,nativeQuery = true)
     List <Question> search(String str);
 
+
+
 }
