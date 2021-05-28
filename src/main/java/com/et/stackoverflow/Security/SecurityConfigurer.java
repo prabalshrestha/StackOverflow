@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     private static final String[] PUBLIC_MATCHERS= {
-
+            "/**",
             "/user/create",
             "/question/all"
 
@@ -68,7 +68,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/question/**").authenticated()
+                /*.antMatchers("/question/**").authenticated()*/
                 .and().formLogin().and().csrf().disable();
 
     }

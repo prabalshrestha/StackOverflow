@@ -28,4 +28,7 @@ public class QuestionService {
     }
 
 
+    public List<Question> search(String str) {
+        return questionRepository.search(str);
+    }
 }
