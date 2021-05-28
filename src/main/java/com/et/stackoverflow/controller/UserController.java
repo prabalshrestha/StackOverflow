@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    @CrossOrigin
     @PostMapping("/user/create")
     private String  createUser (@RequestBody User user){
 
@@ -24,6 +24,7 @@ public class UserController {
         return response;
     }
 
+    @CrossOrigin`
     @DeleteMapping("/user/delete/{userId}")
     private String deleteUser(@PathVariable String userId){
 
