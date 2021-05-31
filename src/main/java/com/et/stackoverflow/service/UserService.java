@@ -1,6 +1,6 @@
 package com.et.stackoverflow.service;
 
-import com.et.stackoverflow.Security.SecurityUtility;
+import com.et.stackoverflow.security.SecurityUtility;
 import com.et.stackoverflow.exception.UserNotFound.UserNotFoundException;
 import com.et.stackoverflow.model.User;
 import com.et.stackoverflow.repository.UserRepository;

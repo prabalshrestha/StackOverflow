@@ -1,4 +1,4 @@
-package com.et.stackoverflow.Security;
+package com.et.stackoverflow.security;
 
 import com.et.stackoverflow.repository.UserRepository;
 import org.springframework.boot.SpringApplication;

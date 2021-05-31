@@ -1,4 +1,4 @@
-package com.et.stackoverflow.Security;
+package com.et.stackoverflow.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 
 @Component
 public class SecurityUtility {
-    private static final String SALT = "salt"; // Salt should be protected carefully
+    private static final String SALT = "salt"; // Salt should e protected carefully
 
     @Bean
 

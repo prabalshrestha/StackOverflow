@@ -1,4 +1,4 @@
-package com.et.stackoverflow.Security;
+package com.et.stackoverflow.security;
 
 import com.et.stackoverflow.filter.JwtFilter;
 import com.et.stackoverflow.service.MyUserDetailsService;
