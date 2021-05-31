@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class QuestionController {
@@ -37,18 +35,13 @@ public class QuestionController {
 
     }
     @CrossOrigin
-    @PostMapping(value = "/question/create"/*,consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
-    public Map<String,String> createQuestion(@RequestBody Question question,
-                                             Principal principal){
+    @PostMapping(value = "/question/create")
+    public String createQuestion(@RequestBody Question question, Principal principal){
         User user = userService.findByUsername(principal.getName());
         question.setUser(user);
         question.setTimestamp(new Date());
         questionService.createQues(question);
-        /*String response ="{\"success\":true,\"message\":\"Question successfully added\"}";*/
-        Map<String,String> response=new HashMap<>();
-        response.put("success","true");
-        response.put("message","Question successfully added");
-
+        String response ="{\"success\":true,\"message\":\"Question successfully added\"}";
         return response;
     }
     @CrossOrigin
@@ -56,4 +49,31 @@ public class QuestionController {
     public List<Question> search(@RequestBody String keyword){
         return questionService.search(keyword);
     }
+
+
+    @CrossOrigin
+    @PutMapping("/question/{questionId}")
+    public String EditQuestion(@PathVariable String questionId,@RequestBody Question question,Principal principal){
+        int quesId=Integer.parseInt(questionId);
+        User user= userService.findUsername(principal.getName());
+        question.setQuestionId(quesId);
+        question.setTimestamp(new Date());
+        question.setUser(user);
+        questionService.editQuestion(question,quesId);
+        String response ="{\"success\":true,\"message\":\"Question successfully Edited\"}";
+        return response;
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/question/{questionId}")
+    public String deleteQuestion(@PathVariable String questionId){
+        int id=Integer.parseInt(questionId);
+        questionService.delete(id);
+        String response ="{\"success\":true,\"message\":\"Question successfully Deleted\"}";
+        return response;
+
+    }
+
+
+
 }
