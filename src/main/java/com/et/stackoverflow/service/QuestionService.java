@@ -40,7 +40,16 @@ public class QuestionService {
         return question;
     }
 
-    public void editQuestion(Question question) {
+    public void editQuestion(Question question,int questionId) {
+        if(questionRepository.findByQuestionId(questionId)==null)
+            throw new QuestionNotFoundException("Question doesnt Exist");
+
         questionRepository.save(question);
+    }
+
+    public void delete(int id) {
+        if(questionRepository.findByQuestionId(id)==null)
+            throw new QuestionNotFoundException("Question doesnt Exist");
+        questionRepository.deleteById(id);
     }
 }

@@ -53,11 +53,25 @@ public class QuestionController {
 
     @CrossOrigin
     @PutMapping("/question/{questionId}")
-    public String EditQuestion(@PathVariable String questionId,@RequestBody Question question){
+    public String EditQuestion(@PathVariable String questionId,@RequestBody Question question,Principal principal){
         int quesId=Integer.parseInt(questionId);
-        questionService.editQuestion(question);
-        String response ="{\"success\":true,\"message\":\"Question successfully added\"}";
+        User user= userService.findUsername(principal.getName());
+        question.setQuestionId(quesId);
+        question.setTimestamp(new Date());
+        question.setUser(user);
+        questionService.editQuestion(question,quesId);
+        String response ="{\"success\":true,\"message\":\"Question successfully Edited\"}";
         return response;
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/question/{questionId}")
+    public String deleteQuestion(@PathVariable String questionId){
+        int id=Integer.parseInt(questionId);
+        questionService.delete(id);
+        String response ="{\"success\":true,\"message\":\"Question successfully Deleted\"}";
+        return response;
+
     }
 
 
