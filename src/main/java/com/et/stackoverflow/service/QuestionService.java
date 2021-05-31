@@ -39,4 +39,8 @@ public class QuestionService {
             throw new QuestionNotFoundException("Question Doesnt Exist");
         return question;
     }
+
+    public void editQuestion(Question question) {
+        questionRepository.save(question);
+    }
 }

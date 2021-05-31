@@ -32,9 +32,11 @@ public class AnswerController {
     }
 
     @CrossOrigin
-    @GetMapping("/question/{id}/answers")
-    public List<Answer> getAnswers(@PathVariable String id){
-        int questionId=Integer.parseInt(id);
+    @GetMapping("/question/{questionid}/answers")
+    public List<Answer> getAnswers(@PathVariable String questionid){
+        int questionId=Integer.parseInt(questionid);
         return answerService.getAnswers(questionId);
     }
+
+
 }
