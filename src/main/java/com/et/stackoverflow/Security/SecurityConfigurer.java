@@ -1,6 +1,5 @@
-package com.et.stackoverflow.security;
+package com.et.stackoverflow.Security;
 
-import com.et.stackoverflow.Security.SecurityUtility;
 import com.et.stackoverflow.filter.JwtFilter;
 import com.et.stackoverflow.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

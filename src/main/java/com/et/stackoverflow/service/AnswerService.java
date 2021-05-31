@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AnswerService {
@@ -28,5 +29,13 @@ public class AnswerService {
         answer.setQuestion(question);
         answer.setTimestamp(new Date());
         answerRepository.save(answer);
+    }
+
+
+    public List<Answer> getAnswers(int questionId) {
+        List<Answer> answers = answerRepository.findAnswersByQuestion_QuestionId(questionId);
+        if(answers.isEmpty())
+            throw new QuestionNotFoundException("Question doesnt Exists");
+        return answers;
     }
 }

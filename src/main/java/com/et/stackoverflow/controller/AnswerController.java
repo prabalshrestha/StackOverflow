@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 public class AnswerController {
@@ -28,5 +29,12 @@ public class AnswerController {
         answerService.createAnswer(id,answer);
         String response="{\"success\":true,\"message\":\"ANSWER CREATED\"}";
         return response;
+    }
+
+    @CrossOrigin
+    @GetMapping("/question/{id}/answers")
+    public List<Answer> getAnswers(@PathVariable String id){
+        int questionId=Integer.parseInt(id);
+        return answerService.getAnswers(questionId);
     }
 }
