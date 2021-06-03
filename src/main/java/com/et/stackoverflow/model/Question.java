@@ -16,7 +16,7 @@ public class Question {
     private String questionTitle;
     private String question;
 
-
+    /*@JsonFormat(pattern="yyyy-MM-dd")*/
     private Date timestamp;
 
 
