@@ -36,9 +36,9 @@ public class QuestionController {
     }
     @CrossOrigin
     @PostMapping(value = "/question/create")
-    public String createQuestion(@RequestBody Question question, Principal principal){
-        User user = userService.findByUsername(principal.getName());
-        question.setUser(user);
+    public String createQuestion(@RequestBody Question question/*, Principal principal*/){
+       /* User user = userService.findByUsername(principal.getName());
+        question.setUser(user);*/
         question.setTimestamp(new Date());
         questionService.createQues(question);
         String response ="{\"success\":true,\"message\":\"Question successfully added\"}";
@@ -52,13 +52,13 @@ public class QuestionController {
 
 
     @CrossOrigin
-    @PutMapping("/question/{questionId}")
-    public String EditQuestion(@PathVariable String questionId,@RequestBody Question question,Principal principal){
+    @PutMapping("/question/{questionId}/edit")
+    public String EditQuestion(@PathVariable String questionId,@RequestBody Question question/*,Principal principal*/){
         int quesId=Integer.parseInt(questionId);
-        User user= userService.findUsername(principal.getName());
+//        User user= userService.findUsername(principal.getName());
         question.setQuestionId(quesId);
         question.setTimestamp(new Date());
-        question.setUser(user);
+//        question.setUser(user);
         questionService.editQuestion(question,quesId);
         String response ="{\"success\":true,\"message\":\"Question successfully Edited\"}";
         return response;
