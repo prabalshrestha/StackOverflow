@@ -21,11 +21,11 @@ public class AnswerController {
 
     @CrossOrigin
     @PostMapping("/question/{questionId}/answer/create")
-    public String createAnswer(@PathVariable String questionId , @RequestBody Answer answer, Principal principal){
+    public String createAnswer(@PathVariable String questionId , @RequestBody Answer answer/*, Principal principal*/){
 
         int id=Integer.parseInt(questionId);
-        User user=userService.findByUsername(principal.getName());
-        answer.setUser(user);
+//        User user=userService.findByUsername(principal.getName());
+//        answer.setUser(user);
         answerService.createAnswer(id,answer);
         String response="{\"success\":true,\"message\":\"ANSWER CREATED\"}";
         return response;

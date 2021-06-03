@@ -45,8 +45,8 @@ public class QuestionController {
         return response;
     }
     @CrossOrigin
-    @GetMapping("/search/")
-    public List<Question> search(@RequestParam String keyword){
+    @GetMapping("/search")
+    public List<Question> search(@RequestBody String keyword){
         return questionService.search(keyword);
     }
 
