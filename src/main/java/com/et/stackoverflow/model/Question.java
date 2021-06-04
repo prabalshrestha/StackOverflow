@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +15,8 @@ public class Question {
     private Integer questionId;
     private String questionTitle;
     private String question;
+
+    /*@JsonFormat(pattern="yyyy-MM-dd")*/
     private Date timestamp;
 
 

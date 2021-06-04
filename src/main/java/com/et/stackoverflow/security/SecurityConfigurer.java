@@ -29,7 +29,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
 
     private static final String[] PUBLIC_MATCHERS= {
-
             "/user/create",
             "/question/all"
 
