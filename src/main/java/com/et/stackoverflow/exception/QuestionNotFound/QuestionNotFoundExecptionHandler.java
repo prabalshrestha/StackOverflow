@@ -16,7 +16,7 @@ public class QuestionNotFoundExecptionHandler {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         QuestionException questionException= new QuestionException(
                 e.getMessage(),
-                badRequest,
+                HttpStatus.NOT_FOUND,
                 ZonedDateTime.now(Clock.systemDefaultZone())
         );
         return new ResponseEntity<>(questionException, badRequest);

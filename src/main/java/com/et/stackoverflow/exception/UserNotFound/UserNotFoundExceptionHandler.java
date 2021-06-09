@@ -18,7 +18,7 @@ public class UserNotFoundExceptionHandler {
         UserException userException= new UserException(
                 e.getMessage(),
                 messageCode,
-                badRequest,
+                HttpStatus.NOT_FOUND,
                 ZonedDateTime.now(Clock.systemDefaultZone())
         );
         return new ResponseEntity<>(userException, badRequest);
